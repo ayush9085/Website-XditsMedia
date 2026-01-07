@@ -1,8 +1,14 @@
-// Wait for EmailJS to load, then initialize
-function initializeEmailJS() {
-  if (typeof emailjs !== 'undefined') {
-    // Initialize EmailJS with your public key
-    emailjs.init('kkJwyWKjxtkoMImLP');
+// Initialize EmailJS when script loads
+(function() {
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init('kkJwyWKjxtkoMImLP');
+      console.log('EmailJS initialized successfully');
+    } else {
+      console.error('EmailJS failed to load');
+    }
     
     // Get form elements
     const contactForm = document.getElementById('contactForm');
@@ -15,17 +21,15 @@ function initializeEmailJS() {
     }
 
     // Handle form submission
-    function handleSubmit(e) {
+    submitBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      e.stopPropagation();
 
-      console.log('Form submitted'); // Debug log
+      console.log('Button clicked');
 
       // Get form values
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const message = document.getElementById('message').value.trim();
-      const subject = 'Someone interested in Xdits Media';
 
       // Validate form
       if (!name || !email || !message) {
@@ -35,72 +39,57 @@ function initializeEmailJS() {
         return;
       }
 
+      // Check if EmailJS is available
+      if (typeof emailjs === 'undefined') {
+        formMessage.textContent = '✕ Email service not available. Please try again later.';
+        formMessage.className = 'form-message error';
+        formMessage.style.display = 'block';
+        return;
+      }
+
       // Show loading state
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
 
-      console.log('Sending email with:', { name, email, subject, message }); // Debug log
+      console.log('Sending email...');
 
       // Send email using EmailJS
       emailjs.send('xdit_media', 'template_bdhw6ka', {
         from_name: name,
         from_email: email,
-        subject: subject,
+        subject: 'Someone interested in Xdits Media',
         message: message,
         reply_to: email
       })
       .then(function(response) {
-        console.log('Email sent successfully!', response.status);
+        console.log('Email sent!', response.status);
         
-        // Show success message
-        formMessage.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
+        formMessage.textContent = '✓ Message sent successfully!';
         formMessage.className = 'form-message success';
         formMessage.style.display = 'block';
         
-        // Clear form and reset button
         contactForm.reset();
         submitBtn.textContent = 'Send Message';
         submitBtn.disabled = false;
         
-        // Hide message after 5 seconds
-        setTimeout(() => {
+        setTimeout(function() {
           formMessage.style.display = 'none';
         }, 5000);
       })
       .catch(function(error) {
-        console.error('Email failed to send:', error);
+        console.error('Email failed:', error);
         
-        // Show error message
-        formMessage.textContent = '✕ Failed to send message. Please try again.';
+        formMessage.textContent = '✕ Failed to send. Please try again.';
         formMessage.className = 'form-message error';
         formMessage.style.display = 'block';
         
-        // Reset button
         submitBtn.textContent = 'Send Message';
         submitBtn.disabled = false;
         
-        // Hide message after 5 seconds
-        setTimeout(() => {
+        setTimeout(function() {
           formMessage.style.display = 'none';
         }, 5000);
       });
-    }
-
-    // Attach event listeners
-    submitBtn.addEventListener('click', handleSubmit);
-    contactForm.addEventListener('submit', handleSubmit);
-    
-    console.log('EmailJS initialized successfully');
-  } else {
-    // Retry if EmailJS hasn't loaded yet
-    console.log('Waiting for EmailJS to load...');
-    setTimeout(initializeEmailJS, 100);
-  }
-}
-
-// Start initialization when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeEmailJS);
-} else {
-  initializeEmailJS();
-}
+    });
+  });
+})();
