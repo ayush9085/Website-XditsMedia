@@ -10,11 +10,15 @@ const formMessage = document.getElementById('formMessage');
 contactForm.addEventListener('submit', function(e) {
   e.preventDefault();
 
+  console.log('Form submitted'); // Debug log
+
   // Get form values
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
   const message = document.getElementById('message').value;
   const subject = 'someone interested in Xdits media';
+
+  console.log('Sending email with:', { name, email, subject, message }); // Debug log
 
   // Send email using EmailJS
   emailjs.send('xdit_media', 'template_bdhw6ka', {
@@ -31,6 +35,7 @@ contactForm.addEventListener('submit', function(e) {
     formMessage.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
     formMessage.classList.remove('error');
     formMessage.classList.add('success');
+    formMessage.style.display = 'block';
     
     // Clear form
     contactForm.reset();
@@ -38,19 +43,22 @@ contactForm.addEventListener('submit', function(e) {
     // Hide message after 5 seconds
     setTimeout(() => {
       formMessage.classList.remove('success');
+      formMessage.style.display = 'none';
     }, 5000);
   })
   .catch(function(error) {
     console.error('Email failed to send:', error);
     
     // Show error message
-    formMessage.textContent = '✕ Failed to send message. Please try again.';
+    formMessage.textContent = '✕ Failed to send message. Error: ' + (error.text || error.message || 'Unknown error');
     formMessage.classList.remove('success');
     formMessage.classList.add('error');
+    formMessage.style.display = 'block';
     
     // Hide message after 5 seconds
     setTimeout(() => {
       formMessage.classList.remove('error');
+      formMessage.style.display = 'none';
     }, 5000);
   });
 });
