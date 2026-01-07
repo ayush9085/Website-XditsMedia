@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xdits Media — Story-Driven Video Editing</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body class="preload">
+
+  <!-- ================= WEBGL BACKGROUND ================= -->
+  <canvas id="webgl-bg"></canvas>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <img src="assets/images/xdits.jpeg" alt="Xdits Media Logo" />
+      </a>
+
+      <nav class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href="#contact" class="nav-cta">Get Started</a>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+      <a href="#work" class="mobile-link">Work</a>
+      <a href="#services" class="mobile-link">Services</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="#contact" class="mobile-cta">Get Started</a>
+    </nav>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Story-Driven Video Editing<br>for Modern Creators</h1>
+      <p>
+        We help creators and brands turn raw footage into engaging,
+        high-retention content — without templates or shortcuts.
+      </p>
+      <a href="#work" class="btn-primary">View Our Work</a>
+    </div>
+    <div class="hero-image">
+      <img src="assets/images/art.jpeg" alt="Creative Video Editing" />
+    </div>
+  </section>
+
+  <!-- ================= TRUSTED BY ================= -->
+  <section class="clients">
+    <p class="clients-title">Trusted by creators & brands</p>
+
+    <div class="clients-track">
+      <!-- SET 1 -->
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitch.tv" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+
+      <!-- SET 2 -->
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitch.tv" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+
+      <!-- SET 3 -->
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitch.tv" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+
+      <!-- SET 4 -->
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitch.tv" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+
+      <!-- SET 5 -->
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+      <a href="https://twitch.tv" target="_blank" rel="noopener noreferrer" class="client-logo"></a>
+    </div>
+  </section>
+
+  <!-- ================= OUR PROCESS ================= -->
+  <section class="process">
+    <h2>Our Process</h2>
+
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <h4>Understand</h4>
+          <p>We study your audience, platform, and content goals.</p>
+        </div>
+      </div>
+      <div class="process-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <h4>Edit</h4>
+          <p>We craft story-first edits that hold attention.</p>
+        </div>
+      </div>
+      <div class="process-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <h4>Refine</h4>
+          <p>We polish pacing, sound, and visuals through feedback.</p>
+        </div>
+      </div>
+      <div class="process-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <h4>Deliver</h4>
+          <p>You receive ready-to-publish, optimized content.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="services" id="services">
+    <h2>Our Services</h2>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">Long-Form Video Editing</div>
+      </div>
+      <div class="service-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">Short-Form Reels & Shorts</div>
+      </div>
+      <div class="service-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">Motion Graphics</div>
+      </div>
+      <div class="service-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">Ad & Campaign Videos</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORK ================= -->
+  <section class="work" id="work">
+    <h2>Selected Work</h2>
+
+    <div class="work-row">
+      <div class="work-card"></div>
+      <div class="work-card"></div>
+      <div class="work-card"></div>
+      <div class="work-card"></div>
+      <div class="work-card"></div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section class="testimonials">
+    <h2>What Clients Say</h2>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <p>
+            "Xdits Media completely changed how our content feels.
+            Clean edits, strong pacing, real storytelling."
+          </p>
+          <span>— Content Creator</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <p>
+            "Fast delivery, smooth communication, and premium output."
+          </p>
+          <span>— Brand Founder</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <p>
+            "They don't just edit — they understand attention."
+          </p>
+          <span>— YouTube Creator</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY US ================= -->
+  <section class="why-us">
+    <h2>Why Work With Us</h2>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">Story-First Editing</div>
+      </div>
+      <div class="why-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">No Templates</div>
+      </div>
+      <div class="why-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">Fast Turnaround</div>
+      </div>
+      <div class="why-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">Clear Communication</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRICING PHILOSOPHY ================= -->
+  <section class="pricing-philosophy">
+    <h2>Turnaround & Pricing Philosophy</h2>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <h4>Custom Quotes</h4>
+          <p>Every project is scoped individually.</p>
+        </div>
+      </div>
+      <div class="philosophy-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <h4>Deadline Respect</h4>
+          <p>Your content schedule always comes first.</p>
+        </div>
+      </div>
+      <div class="philosophy-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <h4>Revision Friendly</h4>
+          <p>We refine until it feels right.</p>
+        </div>
+      </div>
+      <div class="philosophy-card">
+        <div class="card-image">Image</div>
+        <div class="card-content">
+          <h4>Long-Term Focus</h4>
+          <p>Consistency over one-off edits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Do you work with international clients?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, we work remotely with creators and brands worldwide.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What is the turnaround time?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Usually between 3–7 days depending on scope.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Do you offer revisions?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, reasonable revisions are always included.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What's your pricing like?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Pricing varies based on project scope. We offer custom quotes for long-form videos, short-form content, and motion graphics. Get in touch for a personalized estimate.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Who owns the final content?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>You own the final content. We retain no rights — the edited videos are yours to use freely across all platforms.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Can you work with tight deadlines?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Absolutely. We specialize in fast turnarounds. Rush orders are available with priority scheduling.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What file formats do you work with?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>We work with all major formats: MP4, MOV, ProRes, H.264, and more. We can also deliver in specific formats your platform requires.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Do you offer ongoing retainer packages?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, we offer monthly retainer packages for consistent content creation. Perfect for creators publishing multiple videos per week.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORK WITH US ================= -->
+  <section class="work-with-us">
+    <h2>Work With Us</h2>
+    <p class="section-subtitle">
+      Are you a video editor, motion designer, or creative freelancer
+      who values quality and storytelling?
+    </p>
+
+    <div class="work-grid">
+      <div class="work-card">
+        <h4>Video Editors</h4>
+        <p>YouTube, long-form & short-form editors.</p>
+      </div>
+      <div class="work-card">
+        <h4>Motion Designers</h4>
+        <p>After Effects artists with clean animation skills.</p>
+      </div>
+      <div class="work-card">
+        <h4>Creative Freelancers</h4>
+        <p>If you add value, we want to hear from you.</p>
+      </div>
+    </div>
+
+    <a href="#contact" class="btn-primary">Apply to Work With Us</a>
+  </section>
+
+  <!-- ================= SOCIAL MEDIA ================= -->
+  <section class="social-media">
+    <h2>Follow Our Journey</h2>
+    <p class="section-subtitle">
+      Stay updated with behind-the-scenes content and editing tips.
+    </p>
+
+    <div class="social-container">
+      <div class="social-card instagram">
+        <h3>Instagram</h3>
+        <p>@xditsmedia</p>
+        <p class="social-desc">Behind-the-scenes editing clips and creative inspiration</p>
+        <a href="https://www.instagram.com/xditsmedia/" target="_blank" class="btn-secondary">Follow Us</a>
+      </div>
+
+      <div class="social-card youtube">
+        <h3>YouTube</h3>
+        <p>Xdits Media</p>
+        <p class="social-desc">Full case studies and editing tutorials for creators</p>
+        <a href="https://youtube.com/@xditsmedia" target="_blank" class="btn-secondary">Subscribe</a>
+      </div>
+
+      <div class="social-card linkedin">
+        <h3>LinkedIn</h3>
+        <p>Xdits Media</p>
+        <p class="social-desc">Company insights and professional updates</p>
+        <a href="https://www.linkedin.com/company/xditsmedia/posts/?feedView=all" target="_blank" class="btn-secondary">Visit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="extended-cta" id="contact">
+    <h2>What Happens After You Contact Us?</h2>
+
+    <div class="cta-steps">
+      <div class="cta-step">1. You reach out</div>
+      <div class="cta-step">2. We understand your needs</div>
+      <div class="cta-step">3. We propose a plan</div>
+      <div class="cta-step">4. We start creating</div>
+    </div>
+
+    <a href="https://forms.gle/" target="_blank" class="btn-primary">
+      Book a Free Consultation
+    </a>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="footer-brand">XDITS MEDIA</div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/xditsmedia/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Email</a>
+    </div>
+    <p>© 2026 Xdits Media. All rights reserved.</p>
+    <p style="font-size: 0.85rem; margin-top: 0.5rem; opacity: 0.7;">Made by <a href="https://github.com/ayush9085" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Ayush Pandey</a></p>
+  </footer>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
