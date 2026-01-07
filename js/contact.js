@@ -1,5 +1,6 @@
-// Initialize EmailJS
-emailjs.init('xdit_media');
+// Initialize EmailJS with your public key
+// Get your public key from EmailJS Account Settings
+emailjs.init('kkJwyWKjxtkoMImLP');
 
 // Get form elements
 const contactForm = document.getElementById('contactForm');
@@ -12,8 +13,8 @@ contactForm.addEventListener('submit', function(e) {
   // Get form values
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
-  const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value;
+  const subject = 'someone interested in Xdits media';
 
   // Send email using EmailJS
   emailjs.send('xdit_media', 'template_bdhw6ka', {
