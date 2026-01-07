@@ -13,14 +13,17 @@
 
 <body class="preload">
 
+  <!-- ================= SCROLL PROGRESS BAR ================= -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
   <!-- ================= WEBGL BACKGROUND ================= -->
   <canvas id="webgl-bg"></canvas>
 
   <!-- ================= NAVBAR ================= -->
   <header class="navbar">
     <div class="nav-container">
-      <a href="#" class="logo">
-        <img src="assets/images/xdits.jpeg" alt="Xdits Media Logo" />
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="Xdits Media Logo" />
       </a>
 
       <nav class="nav-links">
@@ -58,7 +61,7 @@
       <a href="#work" class="btn-primary">View Our Work</a>
     </div>
     <div class="hero-image">
-      <img src="assets/images/art.jpeg" alt="Creative Video Editing" />
+      <img src="assets/images/logo.png" alt="Xdits Media Logo" />
     </div>
   </section>
 
@@ -315,6 +318,87 @@
     </div>
   </section>
 
+  <!-- ================= PROJECT TYPES WE OFFER ================= -->
+  <section class="project-types" id="project-types">
+    <h2>Project Types We Offer</h2>
+    <p class="section-subtitle">Choose the perfect package for your content needs</p>
+
+    <div class="project-types-grid">
+      <div class="project-type-card">
+        <div class="card-icon">🎬</div>
+        <h3>YouTube Long-Form</h3>
+        <p class="card-description">Full-length YouTube videos with professional editing, color grading, and sound design.</p>
+        <div class="card-features">
+          <span>✓ Story-driven editing</span>
+          <span>✓ Color correction</span>
+          <span>✓ Sound mixing</span>
+          <span>✓ 2 revisions included</span>
+        </div>
+        <div class="card-price">
+          <span class="price-label">Starting at</span>
+          <span class="price-amount">₹5,000</span>
+          <span class="price-per">per video</span>
+        </div>
+        <a href="#contact" class="btn-secondary">Get Quote</a>
+      </div>
+
+      <div class="project-type-card featured">
+        <div class="featured-badge">Popular</div>
+        <div class="card-icon">📱</div>
+        <h3>Short-Form Reels</h3>
+        <p class="card-description">Engaging reels, shorts, and TikTok content optimized for maximum retention.</p>
+        <div class="card-features">
+          <span>✓ Trendy transitions</span>
+          <span>✓ Captions & text</span>
+          <span>✓ Music sync</span>
+          <span>✓ Fast turnaround</span>
+        </div>
+        <div class="card-price">
+          <span class="price-label">Starting at</span>
+          <span class="price-amount">₹1,500</span>
+          <span class="price-per">per reel</span>
+        </div>
+        <a href="#contact" class="btn-secondary">Get Quote</a>
+      </div>
+
+      <div class="project-type-card">
+        <div class="card-icon">✨</div>
+        <h3>Motion Graphics</h3>
+        <p class="card-description">Custom animations, intros, outros, and visual effects for your brand.</p>
+        <div class="card-features">
+          <span>✓ Custom animations</span>
+          <span>✓ Logo reveals</span>
+          <span>✓ Kinetic typography</span>
+          <span>✓ Brand consistency</span>
+        </div>
+        <div class="card-price">
+          <span class="price-label">Starting at</span>
+          <span class="price-amount">₹8,000</span>
+          <span class="price-per">per project</span>
+        </div>
+        <a href="#contact" class="btn-secondary">Get Quote</a>
+      </div>
+
+      <div class="project-type-card">
+        <div class="card-icon">📺</div>
+        <h3>Ads & Commercials</h3>
+        <p class="card-description">High-impact promotional videos designed to convert and drive results.</p>
+        <div class="card-features">
+          <span>✓ Attention hooks</span>
+          <span>✓ CTA optimization</span>
+          <span>✓ Multi-platform formats</span>
+          <span>✓ A/B versions</span>
+        </div>
+        <div class="card-price">
+          <span class="price-label">Starting at</span>
+          <span class="price-amount">₹10,000</span>
+          <span class="price-per">per ad</span>
+        </div>
+        <a href="#contact" class="btn-secondary">Get Quote</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= TESTIMONIALS ================= -->
   <section class="testimonials">
     <h2>What Clients Say</h2>
@@ -500,10 +584,10 @@
 
   <!-- ================= WORK WITH US ================= -->
   <section class="work-with-us">
-    <h2>Work With Us</h2>
+    <h2>Join Our Team</h2>
     <p class="section-subtitle">
-      Are you a video editor, motion designer, or creative freelancer
-      who values quality and storytelling?
+      Join a growing team of editors and designers creating high-quality,
+      story-driven content for creators and brands worldwide.
     </p>
 
     <div class="work-grid">
@@ -522,6 +606,22 @@
     </div>
 
     <a href="#contact" class="btn-primary">Apply to Work With Us</a>
+  </section>
+
+  <!-- ================= ABOUT US ================= -->
+  <section class="about-us" id="about">
+    <h2>About Xdits Media</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>Who We Are</h3>
+        <p>A story-focused post-production studio dedicated to helping creators grow with high-retention content. We blend creativity, strategy, and platform expertise to craft videos that truly hold attention.</p>
+      </div>
+      <div class="about-card founder">
+        <h3>About the Founder</h3>
+        <p>Founded by <strong>Ayan Bhattacharya</strong>, a video editor with years of experience in long-form, storytelling, motion graphics, and creator-focused editing.</p>
+        <p>His approach blends narrative psychology, pacing, and visual rhythm — making content not just watchable, but memorable.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ================= SOCIAL MEDIA ================= -->
@@ -566,6 +666,17 @@
 
       <div class="form-group">
         <input type="email" id="email" name="email" placeholder="Your Email" autocomplete="email" required>
+      </div>
+
+      <div class="form-group">
+        <select id="projectType" name="projectType" required>
+          <option value="" disabled selected>Project Type</option>
+          <option value="youtube-longform">YouTube Long-Form</option>
+          <option value="short-form-reels">Short-Form Reels</option>
+          <option value="motion-graphics">Motion Graphics</option>
+          <option value="ads-commercials">Ads & Commercials</option>
+          <option value="other">Other</option>
+        </select>
       </div>
 
       <div class="form-group">

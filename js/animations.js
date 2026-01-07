@@ -79,6 +79,20 @@ gsap.from(".work .work-card", {
   ease: "power3.out"
 });
 
+/* ================= PROJECT TYPES ================= */
+
+gsap.from(".project-type-card", {
+  scrollTrigger: {
+    trigger: ".project-types",
+    start: "top 75%",
+  },
+  y: 80,
+  opacity: 0,
+  duration: 0.9,
+  stagger: 0.15,
+  ease: "power3.out"
+});
+
 /* ================= TESTIMONIALS ================= */
 
 gsap.from(".testimonial-card", {
@@ -146,6 +160,20 @@ gsap.from(".work-with-us .work-card", {
   opacity: 0,
   duration: 0.8,
   stagger: 0.2,
+  ease: "power3.out"
+});
+
+/* ================= ABOUT US ================= */
+
+gsap.from(".about-card", {
+  scrollTrigger: {
+    trigger: ".about-us",
+    start: "top 75%",
+  },
+  y: 50,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.3,
   ease: "power3.out"
 });
 

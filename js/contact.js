@@ -25,9 +25,10 @@
 
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
+      const projectType = document.getElementById('projectType').value;
       const message = document.getElementById('message').value.trim();
 
-      if (!name || !email || !message) {
+      if (!name || !email || !projectType || !message) {
         formMessage.textContent = '✕ Please fill in all fields';
         formMessage.className = 'form-message error';
         formMessage.style.display = 'block';
@@ -47,8 +48,8 @@
       emailjs.send('xdit_media', 'template_bdhw6ka', {
         from_name: name,
         from_email: email,
-        subject: 'Someone interested in Xdits Media',
-        message: message,
+        subject: 'New Inquiry - ' + projectType,
+        message: 'Project Type: ' + projectType + '\\n\\nMessage:\\n' + message,
         reply_to: email
       })
       .then(function(response) {

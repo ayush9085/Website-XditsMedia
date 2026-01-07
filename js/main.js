@@ -5,6 +5,22 @@
 
 
 /* =========================================================
+   SCROLL PROGRESS BAR
+========================================================= */
+
+const scrollProgress = document.getElementById("scrollProgress");
+
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  if (scrollProgress) {
+    scrollProgress.style.width = scrollPercent + "%";
+  }
+});
+
+
+/* =========================================================
    NAVBAR SCROLL BEHAVIOR
 ========================================================= */
 
@@ -62,6 +78,23 @@ document.addEventListener("click", (e) => {
     menuToggle.classList.remove("active");
     mobileMenu.classList.remove("active");
   }
+});
+
+
+/* =========================================================
+   BUTTON RIPPLE EFFECT
+========================================================= */
+
+document.querySelectorAll(".btn-primary").forEach((btn) => {
+  btn.addEventListener("click", function(e) {
+    const ripple = document.createElement("span");
+    ripple.classList.add("ripple");
+    const rect = this.getBoundingClientRect();
+    ripple.style.left = (e.clientX - rect.left) + "px";
+    ripple.style.top = (e.clientY - rect.top) + "px";
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
 });
 
 /* =========================================================
