@@ -9,25 +9,35 @@ function initializeEmailJS() {
     const submitBtn = document.getElementById('submitBtn');
     const formMessage = document.getElementById('formMessage');
 
-    // Handle button click
-    submitBtn.addEventListener('click', function(e) {
+    if (!submitBtn || !contactForm || !formMessage) {
+      console.error('Form elements not found');
+      return;
+    }
+
+    // Handle form submission
+    function handleSubmit(e) {
       e.preventDefault();
+      e.stopPropagation();
 
       console.log('Form submitted'); // Debug log
 
       // Get form values
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
-      const subject = 'someone interested in Xdits media';
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const subject = 'Someone interested in Xdits Media';
 
       // Validate form
       if (!name || !email || !message) {
         formMessage.textContent = '✕ Please fill in all fields';
-        formMessage.classList.add('error');
+        formMessage.className = 'form-message error';
         formMessage.style.display = 'block';
         return;
       }
+
+      // Show loading state
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
 
       console.log('Sending email with:', { name, email, subject, message }); // Debug log
 
@@ -44,16 +54,16 @@ function initializeEmailJS() {
         
         // Show success message
         formMessage.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
-        formMessage.classList.remove('error');
-        formMessage.classList.add('success');
+        formMessage.className = 'form-message success';
         formMessage.style.display = 'block';
         
-        // Clear form
+        // Clear form and reset button
         contactForm.reset();
+        submitBtn.textContent = 'Send Message';
+        submitBtn.disabled = false;
         
         // Hide message after 5 seconds
         setTimeout(() => {
-          formMessage.classList.remove('success');
           formMessage.style.display = 'none';
         }, 5000);
       })
@@ -61,20 +71,29 @@ function initializeEmailJS() {
         console.error('Email failed to send:', error);
         
         // Show error message
-        formMessage.textContent = '✕ Failed to send message. Error: ' + (error.text || error.message || 'Unknown error');
-        formMessage.classList.remove('success');
-        formMessage.classList.add('error');
+        formMessage.textContent = '✕ Failed to send message. Please try again.';
+        formMessage.className = 'form-message error';
         formMessage.style.display = 'block';
+        
+        // Reset button
+        submitBtn.textContent = 'Send Message';
+        submitBtn.disabled = false;
         
         // Hide message after 5 seconds
         setTimeout(() => {
-          formMessage.classList.remove('error');
           formMessage.style.display = 'none';
         }, 5000);
       });
-    });
+    }
+
+    // Attach event listeners
+    submitBtn.addEventListener('click', handleSubmit);
+    contactForm.addEventListener('submit', handleSubmit);
+    
+    console.log('EmailJS initialized successfully');
   } else {
     // Retry if EmailJS hasn't loaded yet
+    console.log('Waiting for EmailJS to load...');
     setTimeout(initializeEmailJS, 100);
   }
 }

@@ -1081,6 +1081,9 @@ a {
 .btn-primary {
   position: relative;
   overflow: hidden;
+  border: none;
+  outline: none;
+  color: #fff;
 }
 
 .btn-primary::before {
@@ -1092,6 +1095,8 @@ a {
   height: 100%;
   background: rgba(255, 255, 255, 0.2);
   transition: left 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .btn-primary:hover::before {
