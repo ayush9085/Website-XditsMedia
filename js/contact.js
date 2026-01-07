@@ -6,10 +6,11 @@ function initializeEmailJS() {
     
     // Get form elements
     const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
     const formMessage = document.getElementById('formMessage');
 
-    // Handle form submission
-    contactForm.addEventListener('submit', function(e) {
+    // Handle button click
+    submitBtn.addEventListener('click', function(e) {
       e.preventDefault();
 
       console.log('Form submitted'); // Debug log
@@ -19,6 +20,14 @@ function initializeEmailJS() {
       const email = document.getElementById('email').value;
       const message = document.getElementById('message').value;
       const subject = 'someone interested in Xdits media';
+
+      // Validate form
+      if (!name || !email || !message) {
+        formMessage.textContent = '✕ Please fill in all fields';
+        formMessage.classList.add('error');
+        formMessage.style.display = 'block';
+        return;
+      }
 
       console.log('Sending email with:', { name, email, subject, message }); // Debug log
 

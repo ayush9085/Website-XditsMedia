@@ -6,6 +6,21 @@
   box-sizing: border-box;
 }
 
+/* ================= PRELOADER ================= */
+
+body {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+body.preload * {
+    transition: none !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -1006,6 +1021,8 @@ a {
   }
 }
 
+/* .reveal handled by GSAP */
+/*
 .reveal {
   opacity: 0;
   animation: fadeInUp 0.6s ease-out forwards;
@@ -1030,8 +1047,11 @@ a {
 .reveal:nth-child(6) {
   animation-delay: 0.5s;
 }
+*/
 
-/* Hero section animations */
+
+/* Hero section animations handled by GSAP */
+/*
 .hero h1 {
   animation: fadeInUp 0.8s ease-out;
 }
@@ -1043,8 +1063,10 @@ a {
 .hero .btn-primary {
   animation: scaleIn 0.8s ease-out 0.4s both;
 }
+*/
 
-/* Desktop card animations */
+/* Desktop card animations handled by GSAP */
+/*
 .reveal {
   animation: fadeInUp 0.6s ease-out forwards !important;
 }
@@ -1052,6 +1074,8 @@ a {
 .reveal.is-visible {
   opacity: 1 !important;
 }
+*/
+
 
 /* Button glow effect */
 .btn-primary {

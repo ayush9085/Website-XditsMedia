@@ -30,11 +30,25 @@ gsap.from(".hero-content .btn-primary", {
 gsap.from(".clients-title", {
   scrollTrigger: {
     trigger: ".clients",
-    start: "top 80%",
+    start: "top 85%",
   },
   opacity: 0,
   y: 30,
   duration: 0.6
+});
+
+/* ================= PROCESS ================= */
+
+gsap.from(".process-card", {
+  scrollTrigger: {
+    trigger: ".process",
+    start: "top 75%",
+  },
+  y: 60,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.2,
+  ease: "power3.out"
 });
 
 /* ================= SERVICES ================= */
@@ -42,25 +56,39 @@ gsap.from(".clients-title", {
 gsap.from(".service-card", {
   scrollTrigger: {
     trigger: ".services",
-    start: "top 70%",
+    start: "top 75%",
   },
-  y: 80,
+  y: 60,
   opacity: 0,
-  duration: 1,
+  duration: 0.8,
   stagger: 0.15,
   ease: "power3.out"
 });
 
-/* ================= WORK ================= */
+/* ================= WORK (Selected Work) ================= */
 
-gsap.from(".work-card", {
+gsap.from(".work .work-card", {
   scrollTrigger: {
     trigger: ".work",
-    start: "top 70%",
+    start: "top 75%",
   },
-  x: 100,
+  x: 50,
   opacity: 0,
-  duration: 1,
+  duration: 0.8,
+  stagger: 0.1,
+  ease: "power3.out"
+});
+
+/* ================= TESTIMONIALS ================= */
+
+gsap.from(".testimonial-card", {
+  scrollTrigger: {
+    trigger: ".testimonials",
+    start: "top 75%",
+  },
+  y: 50,
+  opacity: 0,
+  duration: 0.8,
   stagger: 0.2,
   ease: "power3.out"
 });
@@ -70,12 +98,27 @@ gsap.from(".work-card", {
 gsap.from(".why-card", {
   scrollTrigger: {
     trigger: ".why-us",
-    start: "top 70%",
+    start: "top 75%",
   },
   y: 60,
   opacity: 0,
   duration: 0.8,
-  stagger: 0.15
+  stagger: 0.15,
+  ease: "power3.out"
+});
+
+/* ================= PRICING PHILOSOPHY ================= */
+
+gsap.from(".philosophy-card", {
+  scrollTrigger: {
+    trigger: ".pricing-philosophy",
+    start: "top 75%",
+  },
+  y: 60,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.15,
+  ease: "power3.out"
 });
 
 /* ================= FAQ ================= */
@@ -83,33 +126,64 @@ gsap.from(".why-card", {
 gsap.from(".faq-item", {
   scrollTrigger: {
     trigger: ".faq",
+    start: "top 80%",
+  },
+  y: 30,
+  opacity: 0,
+  duration: 0.6,
+  stagger: 0.1,
+  ease: "power3.out"
+});
+
+/* ================= WORK WITH US (Recruitment) ================= */
+
+gsap.from(".work-with-us .work-card", {
+  scrollTrigger: {
+    trigger: ".work-with-us",
+    start: "top 75%",
+  },
+  y: 50,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.2,
+  ease: "power3.out"
+});
+
+/* ================= SOCIAL MEDIA ================= */
+
+gsap.from(".social-card", {
+  scrollTrigger: {
+    trigger: ".social-media",
     start: "top 75%",
   },
   y: 40,
   opacity: 0,
-  duration: 0.6,
-  stagger: 0.1
+  duration: 0.8,
+  stagger: 0.2,
+  ease: "power3.out"
 });
 
-/* ================= CTA ================= */
+/* ================= CONTACT CTA ================= */
 
-gsap.from(".cta h3", {
+gsap.from(".extended-cta h2", {
   scrollTrigger: {
-    trigger: ".cta",
-    start: "top 80%",
-  },
-  scale: 0.9,
-  opacity: 0,
-  duration: 0.8
-});
-
-gsap.from(".cta p, .cta .btn-primary", {
-  scrollTrigger: {
-    trigger: ".cta",
+    trigger: ".extended-cta",
     start: "top 80%",
   },
   y: 30,
   opacity: 0,
   duration: 0.8,
-  stagger: 0.2
+  ease: "power3.out"
+});
+
+gsap.from(".contact-form", {
+  scrollTrigger: {
+    trigger: ".extended-cta",
+    start: "top 80%",
+  },
+  y: 40,
+  opacity: 0,
+  duration: 0.8,
+  delay: 0.2,
+  ease: "power3.out"
 });

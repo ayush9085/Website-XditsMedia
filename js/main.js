@@ -1,29 +1,8 @@
 /* =========================================================
    SCROLL REVEAL (Intersection Observer)
 ========================================================= */
+// Replaced by GSAP in js/animations.js
 
-const revealElements = document.querySelectorAll(
-  ".service-card, .process-card, .testimonial-card, .why-card, .philosophy-card, .work-card"
-);
-
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.15,
-  }
-);
-
-revealElements.forEach((el) => {
-  el.classList.add("reveal");
-  revealObserver.observe(el);
-});
 
 /* =========================================================
    NAVBAR SCROLL BEHAVIOR
