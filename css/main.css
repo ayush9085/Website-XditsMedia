@@ -587,38 +587,52 @@ a {
 
 .work {
   padding: 120px 24px;
+  overflow: hidden;
+}
+
+.work h2 {
+  margin-bottom: 30px;
 }
 
 .work-row {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  overflow-y: hidden;
+  padding-bottom: 16px;
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: none;
   -webkit-overflow-scrolling: touch;
+  width: 100%;
+  margin: 0;
+  margin-left: -24px;
+  margin-right: -24px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .work-row::-webkit-scrollbar {
-  height: 4px;
+  height: 6px;
 }
 
 .work-row::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  margin: 4px 0;
 }
 
 .work-row::-webkit-scrollbar-thumb {
-  background: rgba(138, 46, 255, 0.4);
-  border-radius: 2px;
+  background: rgba(138, 46, 255, 0.5);
+  border-radius: 3px;
 }
 
 .work-row::-webkit-scrollbar-thumb:hover {
-  background: rgba(138, 46, 255, 0.7);
+  background: rgba(138, 46, 255, 0.8);
 }
 
 .work-card {
-  min-width: 280px;
+  min-width: 300px;
+  width: 300px;
   height: 380px;
   background: linear-gradient(135deg, rgba(138, 46, 255, 0.1), rgba(138, 46, 255, 0.05));
   border-radius: 16px;
@@ -626,7 +640,13 @@ a {
   border: 1px solid rgba(138, 46, 255, 0.2);
   transition: transform 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
   flex-shrink: 0;
-  scroll-snap-align: start;
+}
+
+.work-card iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+  border-radius: 16px;
 }
 
 .work-card:hover {
