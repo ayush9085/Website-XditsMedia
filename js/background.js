@@ -39,11 +39,16 @@ if (!canvas || !window.THREE) {
         alpha: true,
         antialias: false,
         powerPreference: "low-power",
-        failIfMajorPerformanceCaveat: false
+        failIfMajorPerformanceCaveat: false,
+        preserveDrawingBuffer: false  // Important: don't preserve buffer to prevent accumulation
       });
       // Use window dimensions directly for proper sizing
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      
+      // CRITICAL: Properly clear canvas each frame to prevent white fog on mobile
+      renderer.autoClear = true;
+      renderer.setClearColor(0x000000, 0);  // Transparent clear
     } catch (e) {
       console.warn("WebGL renderer failed to initialize:", e);
       canvas.style.display = 'none';
@@ -202,6 +207,8 @@ if (!canvas || !window.THREE) {
           }
         }
 
+        // Explicitly clear before render to prevent white fog accumulation on mobile
+        renderer.clear();
         renderer.render(scene, camera);
       }
 
