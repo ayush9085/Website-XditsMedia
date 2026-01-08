@@ -4,6 +4,7 @@ const canvas = document.getElementById("webgl-bg");
 if (!canvas || !window.THREE) {
   console.warn("WebGL canvas not found or THREE.js not loaded");
 } else {
+
   // Check for WebGL support
   let webglAvailable = true;
   try {
@@ -40,6 +41,7 @@ if (!canvas || !window.THREE) {
         powerPreference: "low-power",
         failIfMajorPerformanceCaveat: false
       });
+      // Use window dimensions directly for proper sizing
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     } catch (e) {
@@ -88,7 +90,8 @@ if (!canvas || !window.THREE) {
         LENGTH_MIN: 60,
         LENGTH_MAX: 120,
         WIDTH: 3,
-        DEPTH: 900,
+        DEPTH_MIN: -400,   // Far from camera (appears smaller)
+        DEPTH_MAX: 100,    // Not too close to camera (z=360)
 
         // 🔥 BOTTOM-LEFT → TOP-RIGHT
         DIR_X: 0.87,
@@ -136,12 +139,29 @@ if (!canvas || !window.THREE) {
 
       /* ================= RESET ================= */
       function resetComet(comet, initial = false) {
-        // spawn from bottom-left
-        comet.position.x = -window.innerWidth / 2 - Math.random() * 500;
-        comet.position.y = initial
-          ? -Math.random() * window.innerHeight
-          : -window.innerHeight / 2 - 350;
-        comet.position.z = (Math.random() - 0.5) * CONFIG.DEPTH;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        
+        if (initial) {
+          // Initially spread comets across the entire visible area
+          comet.position.x = (Math.random() - 0.5) * vw;
+          comet.position.y = (Math.random() - 0.5) * vh;
+        } else {
+          // After exiting, spawn from either left edge OR bottom edge
+          // This ensures comets enter from different parts of the screen
+          if (Math.random() > 0.5) {
+            // Spawn from left edge (any height)
+            comet.position.x = -vw / 2 - 50 - Math.random() * 200;
+            comet.position.y = (Math.random() - 0.3) * vh; // Bias slightly toward bottom
+          } else {
+            // Spawn from bottom edge (any width on left half)
+            comet.position.x = -vw / 2 + Math.random() * vw * 0.7; // Left 70% of screen
+            comet.position.y = -vh / 2 - 50 - Math.random() * 200;
+          }
+        }
+        
+        // Spawn at varied depths (but not too close to camera)
+        comet.position.z = CONFIG.DEPTH_MIN + Math.random() * (CONFIG.DEPTH_MAX - CONFIG.DEPTH_MIN);
 
         comet.userData.speed =
           CONFIG.SPEED_MIN +
@@ -163,6 +183,9 @@ if (!canvas || !window.THREE) {
         }
 
         animationId = requestAnimationFrame(animate);
+        
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
 
         for (const comet of comets) {
           const s = comet.userData.speed;
@@ -170,9 +193,10 @@ if (!canvas || !window.THREE) {
           comet.position.x += CONFIG.DIR_X * s;
           comet.position.y += CONFIG.DIR_Y * s;
 
+          // Reset when comet exits top-right of screen
           if (
-            comet.position.y > window.innerHeight / 2 + 200 ||
-            comet.position.x > window.innerWidth / 2 + 200
+            comet.position.y > vh / 2 + 200 ||
+            comet.position.x > vw / 2 + 200
           ) {
             resetComet(comet);
           }
@@ -208,6 +232,15 @@ if (!canvas || !window.THREE) {
             removeComet();
           }
         }, 150);
+      });
+      
+      // Also handle orientation change for mobile
+      window.addEventListener("orientationchange", () => {
+        setTimeout(() => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        }, 300);
       });
     }
   }
