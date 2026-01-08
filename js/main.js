@@ -1,4 +1,20 @@
 /* =========================================================
+   PRELOADER
+========================================================= */
+
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    setTimeout(() => {
+      preloader.classList.add("hidden");
+      document.body.classList.remove("preload");
+      document.body.classList.add("loaded");
+    }, 800);
+  }
+});
+
+
+/* =========================================================
    SCROLL REVEAL (Intersection Observer)
 ========================================================= */
 // Replaced by GSAP in js/animations.js
@@ -18,6 +34,32 @@ window.addEventListener("scroll", () => {
     scrollProgress.style.width = scrollPercent + "%";
   }
 });
+
+
+/* =========================================================
+   BACK TO TOP BUTTON
+========================================================= */
+
+const backToTopBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (backToTopBtn) {
+    if (window.scrollY > 500) {
+      backToTopBtn.classList.add("visible");
+    } else {
+      backToTopBtn.classList.remove("visible");
+    }
+  }
+});
+
+if (backToTopBtn) {
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+}
 
 
 /* =========================================================
@@ -152,3 +194,74 @@ document.addEventListener("keydown", (e) => {
     });
   }
 });
+
+/* =========================================================
+   CUSTOM CIRCLE CURSOR
+========================================================= */
+
+const cursor = document.querySelector(".cursor");
+const cursorDot = document.querySelector(".cursor-dot");
+
+if (cursor && cursorDot) {
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+  let dotX = 0, dotY = 0;
+
+  // Track mouse position
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // Smooth cursor animation
+  function animateCursor() {
+    // Smooth follow for outer circle (slower)
+    cursorX += (mouseX - cursorX) * 0.15;
+    cursorY += (mouseY - cursorY) * 0.15;
+    cursor.style.left = cursorX + "px";
+    cursor.style.top = cursorY + "px";
+
+    // Faster follow for dot (more responsive)
+    dotX += (mouseX - dotX) * 0.35;
+    dotY += (mouseY - dotY) * 0.35;
+    cursorDot.style.left = dotX + "px";
+    cursorDot.style.top = dotY + "px";
+
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Hover effect for interactive elements
+  const hoverElements = document.querySelectorAll("a, button, input, textarea, select, .faq-question, .card, .video-card, .pricing-tier, [data-cursor='hover']");
+  
+  hoverElements.forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      cursor.classList.add("hover");
+      cursorDot.classList.add("hover");
+    });
+    el.addEventListener("mouseleave", () => {
+      cursor.classList.remove("hover");
+      cursorDot.classList.remove("hover");
+    });
+  });
+
+  // Click effect
+  document.addEventListener("mousedown", () => {
+    cursor.classList.add("click");
+    cursorDot.classList.add("click");
+  });
+  document.addEventListener("mouseup", () => {
+    cursor.classList.remove("click");
+    cursorDot.classList.remove("click");
+  });
+
+  // Hide cursor when leaving window
+  document.addEventListener("mouseleave", () => {
+    cursor.style.opacity = "0";
+    cursorDot.style.opacity = "0";
+  });
+  document.addEventListener("mouseenter", () => {
+    cursor.style.opacity = "1";
+    cursorDot.style.opacity = "1";
+  });
+}
