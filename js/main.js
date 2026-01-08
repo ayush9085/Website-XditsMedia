@@ -63,6 +63,54 @@ if (backToTopBtn) {
 
 
 /* =========================================================
+   STATS COUNTER ANIMATION
+========================================================= */
+
+const counters = document.querySelectorAll(".counter");
+let countersAnimated = false;
+
+function animateCounters() {
+  counters.forEach((counter) => {
+    const target = parseInt(counter.getAttribute("data-target"));
+    const duration = 2000; // 2 seconds
+    const increment = target / (duration / 16); // 60fps
+    let current = 0;
+
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        counter.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target;
+      }
+    };
+
+    updateCounter();
+  });
+}
+
+// Trigger counters when stats section is in view
+const statsSection = document.querySelector(".stats-section");
+
+if (statsSection) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !countersAnimated) {
+          countersAnimated = true;
+          animateCounters();
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  observer.observe(statsSection);
+}
+
+
+/* =========================================================
    NAVBAR SCROLL BEHAVIOR
 ========================================================= */
 
@@ -200,68 +248,39 @@ document.addEventListener("keydown", (e) => {
 ========================================================= */
 
 const cursor = document.querySelector(".cursor");
-const cursorDot = document.querySelector(".cursor-dot");
 
-if (cursor && cursorDot) {
-  let mouseX = 0, mouseY = 0;
-  let cursorX = 0, cursorY = 0;
-  let dotX = 0, dotY = 0;
-
-  // Track mouse position
+if (cursor) {
+  // Direct cursor position (no lag)
   document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
   });
 
-  // Smooth cursor animation
-  function animateCursor() {
-    // Smooth follow for outer circle (slower)
-    cursorX += (mouseX - cursorX) * 0.15;
-    cursorY += (mouseY - cursorY) * 0.15;
-    cursor.style.left = cursorX + "px";
-    cursor.style.top = cursorY + "px";
-
-    // Faster follow for dot (more responsive)
-    dotX += (mouseX - dotX) * 0.35;
-    dotY += (mouseY - dotY) * 0.35;
-    cursorDot.style.left = dotX + "px";
-    cursorDot.style.top = dotY + "px";
-
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-
   // Hover effect for interactive elements
-  const hoverElements = document.querySelectorAll("a, button, input, textarea, select, .faq-question, .card, .video-card, .pricing-tier, [data-cursor='hover']");
+  const hoverElements = document.querySelectorAll("a, button, input, textarea, select, .faq-question, .card, .video-card, .pricing-tier, .service-card, .process-card, .work-card, [data-cursor='hover']");
   
   hoverElements.forEach((el) => {
     el.addEventListener("mouseenter", () => {
       cursor.classList.add("hover");
-      cursorDot.classList.add("hover");
     });
     el.addEventListener("mouseleave", () => {
       cursor.classList.remove("hover");
-      cursorDot.classList.remove("hover");
     });
   });
 
   // Click effect
   document.addEventListener("mousedown", () => {
     cursor.classList.add("click");
-    cursorDot.classList.add("click");
   });
   document.addEventListener("mouseup", () => {
     cursor.classList.remove("click");
-    cursorDot.classList.remove("click");
   });
 
   // Hide cursor when leaving window
   document.addEventListener("mouseleave", () => {
     cursor.style.opacity = "0";
-    cursorDot.style.opacity = "0";
   });
   document.addEventListener("mouseenter", () => {
     cursor.style.opacity = "1";
-    cursorDot.style.opacity = "1";
   });
 }

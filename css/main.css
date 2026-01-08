@@ -10,59 +10,33 @@
 
 .cursor {
   position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 2px solid rgba(138, 46, 255, 0.8);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-  z-index: 9999;
-  mix-blend-mode: difference;
-}
-
-.cursor-dot {
-  position: fixed;
   width: 8px;
   height: 8px;
-  background-color: #8a2eff;
+  background: #8a2eff;
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  z-index: 10000;
-  transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease;
+  z-index: 9999;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 10px rgba(138, 46, 255, 0.5);
 }
 
 /* Cursor hover states */
 .cursor.hover {
-  width: 60px;
-  height: 60px;
-  border-color: rgba(138, 46, 255, 1);
-  background-color: rgba(138, 46, 255, 0.1);
-}
-
-.cursor-dot.hover {
-  width: 4px;
-  height: 4px;
-  background-color: #fff;
+  transform: translate(-50%, -50%) scale(4);
+  background: rgba(138, 46, 255, 0.3);
+  box-shadow: 0 0 20px rgba(138, 46, 255, 0.6);
 }
 
 /* Cursor click state */
 .cursor.click {
-  width: 30px;
-  height: 30px;
-  border-color: #fff;
-}
-
-.cursor-dot.click {
-  width: 12px;
-  height: 12px;
+  transform: translate(-50%, -50%) scale(0.6);
+  background: #fff;
 }
 
 /* Hide custom cursor on touch devices */
 @media (hover: none) and (pointer: coarse) {
-  .cursor,
-  .cursor-dot {
+  .cursor {
     display: none;
   }
 }
@@ -761,16 +735,35 @@ a {
   margin-top: 28px;
   padding: 14px 30px;
   border-radius: 999px;
-  background: #8a2eff;
+  background: linear-gradient(135deg, #8a2eff, #b366ff);
   font-size: 14px;
   font-weight: 600;
-  transition: transform 0.25s ease, background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
+  border: none;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
 }
 
 .btn-primary:hover {
   transform: translateY(-4px) scale(1.08);
-  background: #7b26e0;
   box-shadow: 
     0 15px 35px rgba(138, 46, 255, 0.4),
     0 5px 15px rgba(0, 0, 0, 0.2);
@@ -779,6 +772,101 @@ a {
 .btn-primary:active {
   transform: translateY(-1px) scale(1.02);
   transition: all 0.1s ease;
+}
+
+/* ================= STATS COUNTER SECTION ================= */
+
+.stats-section {
+  padding: 80px 24px;
+  background: linear-gradient(180deg, rgba(138, 46, 255, 0.05) 0%, transparent 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(138, 46, 255, 0.3), transparent);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(138, 46, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-10px);
+  background: rgba(138, 46, 255, 0.1);
+  border-color: rgba(138, 46, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(138, 46, 255, 0.2);
+}
+
+.stat-number {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, #c896ff 50%, #8a2eff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.stat-number .counter {
+  display: inline-block;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.stat-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 500px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .stat-item {
+    padding: 24px 16px;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+  }
 }
 
 /* ================= TRUSTED / CLIENTS ================= */
