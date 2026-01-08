@@ -102,5 +102,53 @@ document.querySelectorAll(".btn-primary").forEach((btn) => {
 ========================================================= */    
 
  window.addEventListener("load", () => {
+  document.body.classList.remove("preload");
   document.body.classList.add("loaded");
+});
+
+/* =========================================================
+   PORTFOLIO MODALS
+========================================================= */
+
+// Open portfolio modal
+document.querySelectorAll("[data-portfolio]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const portfolioId = btn.getAttribute("data-portfolio");
+    const modal = document.getElementById(`portfolio-${portfolioId}`);
+    if (modal) {
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+  });
+});
+
+// Close portfolio modal with close button
+document.querySelectorAll(".portfolio-close").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const modal = btn.closest(".portfolio-modal");
+    if (modal) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+});
+
+// Close portfolio modal when clicking outside content
+document.querySelectorAll(".portfolio-modal").forEach((modal) => {
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+});
+
+// Close portfolio modal with Escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    document.querySelectorAll(".portfolio-modal.active").forEach((modal) => {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+  }
 });

@@ -171,11 +171,13 @@ a {
   margin: 0 14px;
   font-size: 13px;
   opacity: 0.7;
-  transition: opacity 0.25s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
   opacity: 1;
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(138, 46, 255, 0.5);
 }
 
 .nav-cta {
@@ -188,8 +190,14 @@ a {
 }
 
 .nav-cta:hover {
-  transform: scale(1.06);
+  transform: scale(1.08) translateY(-2px);
   background: #7b26e0;
+  box-shadow: 0 10px 25px rgba(138, 46, 255, 0.4);
+}
+
+.nav-cta:active {
+  transform: scale(1.02);
+  transition: all 0.1s ease;
 }
 
 .menu-toggle {
@@ -312,6 +320,14 @@ a {
   border-radius: 20px;
   border: none;
   box-shadow: 0 20px 60px rgba(138, 46, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.hero-image:hover img {
+  transform: scale(1.03) translateY(-5px);
+  box-shadow: 
+    0 30px 80px rgba(138, 46, 255, 0.35),
+    0 0 50px rgba(138, 46, 255, 0.2);
 }
 
 .hero h1 {
@@ -343,8 +359,16 @@ a {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px) scale(1.06);
+  transform: translateY(-4px) scale(1.08);
   background: #7b26e0;
+  box-shadow: 
+    0 15px 35px rgba(138, 46, 255, 0.4),
+    0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.1s ease;
 }
 
 /* ================= TRUSTED / CLIENTS ================= */
@@ -384,18 +408,22 @@ a {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   opacity: 0.5;
-  transition: transform 0.25s ease, opacity 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   flex-shrink: 0;
   display: block;
+  background: rgba(138, 46, 255, 0.05);
 }
 
 .client-item:hover .client-logo {
-  transform: translateY(-6px) scale(1.1);
+  transform: translateY(-10px) scale(1.15);
   opacity: 1;
-  border-color: rgba(138, 46, 255, 0.6);
-  box-shadow: 0 15px 35px rgba(138, 46, 255, 0.3);
+  border-color: rgba(138, 46, 255, 0.7);
+  box-shadow: 
+    0 20px 40px rgba(138, 46, 255, 0.4),
+    0 0 30px rgba(138, 46, 255, 0.2);
+  animation: glowPulse 1.5s ease-in-out infinite;
 }
 
 .client-name {
@@ -445,13 +473,25 @@ a {
   width: 100%;
   height: 180px;
   background: rgba(138, 46, 255, 0.15);
-  border: 2px dashed rgba(138, 46, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(138, 46, 255, 0.6);
   font-size: 12px;
   margin-bottom: 0;
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+}
+
+.process-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.process-card:hover .card-image img {
+  transform: scale(1.08);
 }
 
 .process-card .card-content {
@@ -481,13 +521,25 @@ a {
   width: 100%;
   height: 180px;
   background: rgba(138, 46, 255, 0.15);
-  border: 2px dashed rgba(138, 46, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(138, 46, 255, 0.6);
   font-size: 12px;
   margin-bottom: 0;
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+}
+
+.service-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover .card-image img {
+  transform: scale(1.08);
 }
 
 .service-card .card-content {
@@ -513,16 +565,54 @@ a {
 
 .service-card,
 .process-card,
-.testimonial-card,
 .why-card,
 .philosophy-card {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 18px;
   padding: 0;
-  transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
+  transform-origin: center center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+}
+
+/* Shimmer overlay for cards */
+.service-card::before,
+.process-card::before,
+.why-card::before,
+.philosophy-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(138, 46, 255, 0.05) 40%,
+    rgba(138, 46, 255, 0.15) 50%,
+    rgba(138, 46, 255, 0.05) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.service-card:hover::before,
+.process-card:hover::before,
+.why-card:hover::before,
+.philosophy-card:hover::before {
+  opacity: 1;
+  animation: shimmer 1.5s ease-in-out;
 }
 
 .service-card .card-content,
@@ -544,29 +634,90 @@ a {
   width: 100%;
   height: 180px;
   background: rgba(138, 46, 255, 0.15);
-  border: 2px dashed rgba(138, 46, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(138, 46, 255, 0.6);
   font-size: 12px;
   margin-bottom: 0;
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+}
+
+.why-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.why-card:hover .card-image img {
+  transform: scale(1.08);
 }
 
 .why-card .card-content {
   padding: 36px 28px;
 }
 
-/* HOVER EFFECTS */
+/* HOVER EFFECTS - Enhanced Pop-Out */
 .service-card:hover,
 .process-card:hover,
 .testimonial-card:hover,
 .why-card:hover,
 .philosophy-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  background: rgba(138, 46, 255, 0.18);
-  border-color: rgba(138, 46, 255, 0.3);
-  box-shadow: 0 20px 40px rgba(138, 46, 255, 0.3);
+  transform: translateY(-16px) scale(1.04);
+  background: rgba(138, 46, 255, 0.15);
+  border-color: rgba(138, 46, 255, 0.5);
+  box-shadow: 
+    0 25px 50px rgba(138, 46, 255, 0.35),
+    0 10px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Active state for click feedback */
+.service-card:active,
+.process-card:active,
+.testimonial-card:active,
+.why-card:active,
+.philosophy-card:active {
+  transform: translateY(-8px) scale(1.01);
+  transition: all 0.1s ease;
+}
+
+/* Card image hover zoom effect */
+.service-card .card-image,
+.process-card .card-image,
+.why-card .card-image,
+.philosophy-card .card-image {
+  transition: transform 0.4s ease, filter 0.4s ease;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.service-card:hover .card-image,
+.process-card:hover .card-image,
+.why-card:hover .card-image,
+.philosophy-card:hover .card-image {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Card content lift on hover */
+.service-card .card-content,
+.process-card .card-content,
+.why-card .card-content,
+.philosophy-card .card-content {
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.service-card:hover .card-content,
+.process-card:hover .card-content,
+.why-card:hover .card-content,
+.philosophy-card:hover .card-content {
+  transform: translateY(-4px);
 }
 
 /* ================= PROJECT TYPES WE OFFER ================= */
@@ -594,22 +745,50 @@ a {
   border-radius: 24px;
   padding: 40px 28px 32px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.35s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+  overflow: hidden;
+}
+
+.project-type-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(138, 46, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(138, 46, 255, 0.05) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.project-type-card:hover::before {
+  opacity: 1;
 }
 
 .project-type-card.featured {
   background: linear-gradient(135deg, rgba(138, 46, 255, 0.15) 0%, rgba(88, 20, 180, 0.15) 100%);
   border: 2px solid rgba(138, 46, 255, 0.4);
   transform: scale(1.02);
+  padding-top: 50px;
+  margin-top: 10px;
 }
 
 .featured-badge {
   position: absolute;
-  top: -12px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #8a2eff, #5814b4);
@@ -626,11 +805,15 @@ a {
   font-size: 48px;
   margin-bottom: 20px;
   filter: drop-shadow(0 4px 12px rgba(138, 46, 255, 0.3));
+  position: relative;
+  z-index: 1;
 }
 
 .project-type-card h3 {
   font-size: 22px;
   font-weight: 700;
+  position: relative;
+  z-index: 1;
   margin-bottom: 12px;
   color: #fff;
 }
@@ -641,6 +824,8 @@ a {
   line-height: 1.6;
   margin-bottom: 20px;
   min-height: 48px;
+  position: relative;
+  z-index: 1;
 }
 
 .project-type-card .card-features {
@@ -649,6 +834,8 @@ a {
   gap: 8px;
   margin-bottom: 24px;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .project-type-card .card-features span {
@@ -667,6 +854,8 @@ a {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .project-type-card .price-label {
@@ -692,6 +881,44 @@ a {
   margin-top: 4px;
 }
 
+.project-type-card .card-buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.project-type-card .btn-outline {
+  flex: 1;
+  text-align: center;
+  padding: 14px 20px;
+  background: transparent;
+  border: 2px solid rgba(138, 46, 255, 0.5);
+  border-radius: 8px;
+  color: #c896ff;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.project-type-card .btn-outline:hover {
+  background: rgba(138, 46, 255, 0.15);
+  border-color: rgba(138, 46, 255, 0.8);
+  color: #fff;
+}
+
+.project-type-card .card-buttons .btn-secondary {
+  flex: 1;
+  text-align: center;
+  padding: 14px 20px;
+  margin-top: 0;
+}
+
 .project-type-card .btn-secondary {
   width: 100%;
   text-align: center;
@@ -700,14 +927,35 @@ a {
 }
 
 .project-type-card:hover {
-  transform: translateY(-8px);
-  background: rgba(138, 46, 255, 0.12);
-  border-color: rgba(138, 46, 255, 0.35);
-  box-shadow: 0 20px 50px rgba(138, 46, 255, 0.25);
+  transform: translateY(-12px) scale(1.03);
+  background: rgba(138, 46, 255, 0.15);
+  border-color: rgba(138, 46, 255, 0.5);
+  box-shadow: 
+    0 25px 60px rgba(138, 46, 255, 0.35),
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.project-type-card:active {
+  transform: translateY(-6px) scale(1.01);
+  transition: all 0.1s ease;
 }
 
 .project-type-card.featured:hover {
-  transform: scale(1.02) translateY(-8px);
+  transform: scale(1.05) translateY(-12px);
+  box-shadow: 
+    0 30px 70px rgba(138, 46, 255, 0.45),
+    0 15px 40px rgba(88, 20, 180, 0.3);
+}
+
+/* Icon pop on hover */
+.project-type-card .card-icon {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
+}
+
+.project-type-card:hover .card-icon {
+  transform: scale(1.2) translateY(-5px);
+  filter: drop-shadow(0 8px 20px rgba(138, 46, 255, 0.5));
 }
 
 /* ================= TESTIMONIALS ================= */
@@ -715,52 +963,116 @@ a {
 .testimonials {
   padding: 120px 24px;
 }
-.testimonial-card .card-image {
+
+/* ================= GOOGLE-STYLE TESTIMONIALS ================= */
+
+.testimonial-scroll-container {
   width: 100%;
-  height: 120px;
-  background: rgba(138, 46, 255, 0.15);
-  border-bottom: 2px dashed rgba(138, 46, 255, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(138, 46, 255, 0.6);
-  font-size: 12px;
+  max-width: 1400px;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding: 20px 0 40px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(138, 46, 255, 0.5) transparent;
 }
 
-.testimonial-card .card-content {
-  padding: 36px 28px;
+.testimonial-scroll-container::-webkit-scrollbar {
+  height: 8px;
 }
+
+.testimonial-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.testimonial-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(138, 46, 255, 0.5);
+  border-radius: 10px;
+}
+
+.testimonial-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(138, 46, 255, 0.7);
+}
+
+.testimonial-track {
+  display: flex;
+  gap: 24px;
+  padding: 10px;
+  width: max-content;
+}
+
 .testimonial-card {
-  padding: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 320px;
+  max-width: 320px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
-.testimonial-card .card-image {
-  width: 100%;
-  height: 120px;
-  background: rgba(138, 46, 255, 0.15);
-  border: 2px dashed rgba(138, 46, 255, 0.4);
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  background: rgba(138, 46, 255, 0.08);
+  border-color: rgba(138, 46, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(138, 46, 255, 0.2);
+}
+
+.review-header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: rgba(138, 46, 255, 0.6);
-  font-size: 12px;
-  margin-bottom: 0;
+  gap: 14px;
 }
 
-.testimonial-card .card-content {
-  padding: 36px 28px;
+.reviewer-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(138, 46, 255, 0.3);
 }
 
-.testimonial-card p {
+.reviewer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reviewer-info h4 {
   font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
 }
 
-.testimonial-card span {
+.reviewer-info .reviewer-title {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.review-stars {
+  font-size: 16px;
+  color: #fbbf24;
+  letter-spacing: 2px;
+}
+
+.review-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  flex-grow: 1;
+}
+
+.review-date {
   font-size: 12px;
-  opacity: 0.6;
-  display: block;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: auto;
 }
 
 /* ================= WHY US SECTION ================= */
@@ -779,12 +1091,24 @@ a {
   width: 100%;
   height: 180px;
   background: rgba(138, 46, 255, 0.15);
-  border-bottom: 2px dashed rgba(138, 46, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(138, 46, 255, 0.6);
   font-size: 12px;
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+}
+
+.philosophy-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.philosophy-card:hover .card-image img {
+  transform: scale(1.08);
 }
 
 .philosophy-card .card-content {
@@ -792,7 +1116,7 @@ a {
 }
 
 .philosophy-card {
-  padding: 36px 28px;
+  padding: 0;
 }
 
 /* ================= WORK SECTION ================= */
@@ -845,13 +1169,18 @@ a {
 .work-card {
   min-width: 300px;
   width: 300px;
-  height: 380px;
+  height: 533px;
+  aspect-ratio: 9 / 16;
   background: linear-gradient(135deg, rgba(138, 46, 255, 0.1), rgba(138, 46, 255, 0.05));
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(138, 46, 255, 0.2);
-  transition: transform 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   flex-shrink: 0;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .work-card iframe {
@@ -862,9 +1191,27 @@ a {
 }
 
 .work-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  background: linear-gradient(135deg, rgba(138, 46, 255, 0.2), rgba(138, 46, 255, 0.1));
-  box-shadow: 0 20px 40px rgba(138, 46, 255, 0.3);
+  transform: translateY(-16px) scale(1.05) rotateX(2deg);
+  background: linear-gradient(135deg, rgba(138, 46, 255, 0.25), rgba(138, 46, 255, 0.12));
+  box-shadow: 
+    0 30px 60px rgba(138, 46, 255, 0.4),
+    0 15px 30px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(138, 46, 255, 0.5);
+}
+
+.work-card:active {
+  transform: translateY(-8px) scale(1.02);
+  transition: all 0.1s ease;
+}
+
+/* Iframe scale on card hover */
+.work-card iframe {
+  transition: transform 0.4s ease;
+}
+
+.work-card:hover iframe {
+  transform: scale(1.03);
 }
 
 /* ================= FAQ ================= */
@@ -899,12 +1246,19 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .faq-question:hover {
-  background: rgba(138, 46, 255, 0.12);
-  border-color: rgba(138, 46, 255, 0.3);
+  background: rgba(138, 46, 255, 0.15);
+  border-color: rgba(138, 46, 255, 0.4);
+  transform: translateX(8px);
+  box-shadow: -4px 0 20px rgba(138, 46, 255, 0.2);
+}
+
+.faq-question:active {
+  transform: translateX(4px);
+  transition: all 0.1s ease;
 }
 
 .faq-question span {
@@ -960,7 +1314,7 @@ a {
   max-width: 1100px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 28px;
   margin-bottom: 40px;
 }
@@ -968,22 +1322,48 @@ a {
 .work-with-us .work-card {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 18px;
-  padding: 36px 28px;
-  height: auto;
-  min-width: auto;
+  padding: 0;
+  height: auto !important;
+  min-width: auto !important;
+  width: auto !important;
+  aspect-ratio: unset !important;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  flex-shrink: 1;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.work-with-us .work-card .card-image {
+  width: 100%;
+  height: 180px;
+  background: rgba(138, 46, 255, 0.15);
+  overflow: hidden;
+}
+
+.work-with-us .work-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.work-with-us .work-card:hover .card-image img {
+  transform: scale(1.08);
 }
 
 .work-with-us .work-card h4 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
+  padding: 24px 28px 0;
+  color: #fff;
 }
 
 .work-with-us .work-card p {
   font-size: 14px;
   opacity: 0.7;
   line-height: 1.5;
+  padding: 0 28px 24px;
 }
 
 .work-with-us .work-card:hover {
@@ -991,6 +1371,13 @@ a {
   background: rgba(138, 46, 255, 0.18);
   border-color: rgba(138, 46, 255, 0.3);
   box-shadow: 0 20px 40px rgba(138, 46, 255, 0.25);
+}
+
+@media (max-width: 768px) {
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 .work-with-us .btn-primary {
@@ -1031,7 +1418,7 @@ a {
   color: #fff;
   font-size: 14px;
   font-family: inherit;
-  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .contact-form input::placeholder,
@@ -1043,8 +1430,11 @@ a {
 .contact-form textarea:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(138, 46, 255, 0.6);
-  box-shadow: 0 0 20px rgba(138, 46, 255, 0.2);
+  border-color: rgba(138, 46, 255, 0.7);
+  box-shadow: 
+    0 0 25px rgba(138, 46, 255, 0.3),
+    inset 0 0 10px rgba(138, 46, 255, 0.05);
+  transform: translateY(-2px);
 }
 
 .contact-form button {
@@ -1088,15 +1478,22 @@ a {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.25s ease, background 0.25s ease;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .cta-step:hover {
-  transform: scale(1.06);
-  background: rgba(138, 46, 255, 0.25);
-  border-color: rgba(138, 46, 255, 0.4);
+  transform: scale(1.08) translateY(-4px);
+  background: rgba(138, 46, 255, 0.3);
+  border-color: rgba(138, 46, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(138, 46, 255, 0.3);
+}
+
+.cta-step:active {
+  transform: scale(1.02);
+  transition: all 0.1s ease;
 }
 
 /* ================= ABOUT US SECTION ================= */
@@ -1116,15 +1513,45 @@ a {
 .about-card {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 18px;
-  padding: 40px 32px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  will-change: transform, box-shadow;
+  overflow: hidden;
+}
+
+.about-card .card-image {
+  width: 100%;
+  height: 200px;
+  background: rgba(138, 46, 255, 0.15);
+  overflow: hidden;
+}
+
+.about-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.about-card:hover .card-image img {
+  transform: scale(1.08);
 }
 
 .about-card:hover {
-  transform: translateY(-8px);
-  background: rgba(138, 46, 255, 0.1);
-  box-shadow: 0 20px 40px rgba(138, 46, 255, 0.2);
+  transform: translateY(-14px) scale(1.03);
+  background: rgba(138, 46, 255, 0.12);
+  box-shadow: 
+    0 25px 50px rgba(138, 46, 255, 0.3),
+    0 10px 25px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(138, 46, 255, 0.4);
+}
+
+.about-card:active {
+  transform: translateY(-6px) scale(1.01);
+  transition: all 0.1s ease;
 }
 
 .about-card h3 {
@@ -1132,6 +1559,7 @@ a {
   font-weight: 700;
   margin-bottom: 16px;
   color: #c084fc;
+  padding: 24px 32px 0;
 }
 
 .about-card p {
@@ -1139,6 +1567,11 @@ a {
   line-height: 1.7;
   opacity: 0.8;
   margin-bottom: 12px;
+  padding: 0 32px;
+}
+
+.about-card p:last-child {
+  padding-bottom: 24px;
 }
 
 .about-card.founder {
@@ -1203,11 +1636,13 @@ a {
   margin: 0 6px;
   font-size: 12px;
   opacity: 0.7;
-  transition: opacity 0.25s ease;
+  transition: all 0.3s ease;
 }
 
 .footer-links a:hover {
   opacity: 1;
+  transform: translateY(-2px);
+  color: #c084fc;
 }
 
 .footer p {
@@ -1258,6 +1693,71 @@ a {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* Pop-out effect animation */
+@keyframes popOut {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  60% {
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Bounce pop effect */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Float animation for cards on hover */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Shimmer effect for cards */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Glow pulse animation */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(138, 46, 255, 0.2),
+                0 0 20px rgba(138, 46, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(138, 46, 255, 0.4),
+                0 0 40px rgba(138, 46, 255, 0.2);
   }
 }
 
@@ -1416,22 +1916,53 @@ a {
 .social-card {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 18px;
-  padding: 40px 32px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   text-align: center;
-  transition: transform 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-card .card-image {
+  width: 100%;
+  height: 140px;
+  background: rgba(138, 46, 255, 0.15);
+  overflow: hidden;
+}
+
+.social-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.social-card:hover .card-image img {
+  transform: scale(1.08);
 }
 
 .social-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 40px rgba(138, 46, 255, 0.2);
+  transform: translateY(-16px) scale(1.04);
+  box-shadow: 
+    0 25px 50px rgba(138, 46, 255, 0.3),
+    0 10px 25px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.social-card:active {
+  transform: translateY(-8px) scale(1.01);
+  transition: all 0.1s ease;
 }
 
 .social-card h3 {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+  padding: 24px 32px 0;
 }
 
 .social-card > p:nth-of-type(1) {
@@ -1439,12 +1970,22 @@ a {
   opacity: 0.7;
   margin-bottom: 12px;
   font-weight: 600;
+  position: relative;
+  z-index: 1;
+  padding: 0 32px;
 }
 
 .social-card .social-desc {
   font-size: 14px;
   opacity: 0.6;
   line-height: 1.6;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+  padding: 0 32px;
+}
+
+.social-card .btn-secondary {
   margin-bottom: 24px;
 }
 
@@ -1479,14 +2020,22 @@ a {
   background: rgba(255, 255, 255, 0.1);
   font-size: 13px;
   font-weight: 600;
-  transition: all 0.25s ease;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }
 
 .btn-secondary:hover {
-  background: rgba(138, 46, 255, 0.3);
+  background: rgba(138, 46, 255, 0.35);
   border-color: #8a2eff;
   color: #fff;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(138, 46, 255, 0.3);
+}
+
+.btn-secondary:active {
+  transform: translateY(-1px) scale(1.01);
+  transition: all 0.1s ease;
 }
 /* ================= RESPONSIVE ================= */
 
@@ -1668,8 +2217,9 @@ a {
   }
 
   .work-card {
-    min-width: 240px;
-    height: 300px;
+    min-width: 260px;
+    height: 462px;
+    aspect-ratio: 9 / 16;
   }
 
   .cta-steps {
@@ -1752,7 +2302,6 @@ a {
 
   .service-card,
   .process-card,
-  .testimonial-card,
   .why-card,
   .philosophy-card {
     padding: 0;
@@ -1760,7 +2309,6 @@ a {
 
   .service-card .card-image,
   .process-card .card-image,
-  .testimonial-card .card-image,
   .why-card .card-image,
   .philosophy-card .card-image {
     height: 120px;
@@ -1768,10 +2316,25 @@ a {
 
   .service-card .card-content,
   .process-card .card-content,
-  .testimonial-card .card-content,
   .why-card .card-content,
   .philosophy-card .card-content {
     padding: 16px 14px;
+  }
+
+  /* Responsive testimonial cards */
+  .testimonial-card {
+    min-width: 280px;
+    max-width: 280px;
+    padding: 20px;
+  }
+
+  .reviewer-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .review-text {
+    font-size: 13px;
   }
 
   .btn-primary {
@@ -1781,8 +2344,9 @@ a {
   }
 
   .work-card {
-    min-width: 180px;
-    height: 240px;
+    min-width: 220px;
+    height: 390px;
+    aspect-ratio: 9 / 16;
   }
 
   .clients-track {
@@ -1800,3 +2364,235 @@ a {
     font-size: 12px;
   }
 }
+
+/* ================= PORTFOLIO PAGES ================= */
+
+.portfolio-hero {
+  padding: 160px 24px 80px;
+  text-align: center;
+}
+
+.portfolio-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-block;
+  color: #c896ff;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 24px;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: #fff;
+}
+
+.portfolio-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff, #c896ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.portfolio-hero p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.portfolio-work {
+  padding: 60px 0 80px;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  max-width: 100vw;
+  width: 100%;
+}
+
+.portfolio-work h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  padding: 0 24px;
+}
+
+.portfolio-work .work-row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 24px;
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  padding: 20px 24px 40px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(138, 46, 255, 0.5) rgba(255, 255, 255, 0.05);
+  width: max-content;
+  min-width: 100%;
+}
+
+.portfolio-work .work-card {
+  min-width: 300px !important;
+  width: 300px !important;
+  height: 533px !important;
+  flex-shrink: 0 !important;
+  scroll-snap-align: start;
+}
+
+.portfolio-work .work-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.portfolio-work .work-row::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.portfolio-work .work-row::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, rgba(138, 46, 255, 0.6), rgba(200, 150, 255, 0.6));
+  border-radius: 4px;
+}
+
+.portfolio-work .work-row::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, rgba(138, 46, 255, 0.9), rgba(200, 150, 255, 0.9));
+}
+
+.portfolio-cta {
+  padding: 80px 24px;
+  text-align: center;
+  background: rgba(138, 46, 255, 0.05);
+  border-top: 1px solid rgba(138, 46, 255, 0.2);
+  border-bottom: 1px solid rgba(138, 46, 255, 0.2);
+}
+
+.portfolio-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.portfolio-cta p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .portfolio-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .portfolio-hero p {
+    font-size: 1rem;
+  }
+}
+
+/* ================= PORTFOLIO MODALS ================= */
+
+.portfolio-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-modal.active {
+  display: block;
+  opacity: 1;
+}
+
+.portfolio-modal-content {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 40px 24px;
+  position: relative;
+}
+
+.portfolio-modal-content h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff, #c896ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.portfolio-modal-content > p {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+
+.portfolio-close {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 48px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  line-height: 1;
+}
+
+.portfolio-close:hover {
+  color: #c896ff;
+  transform: rotate(90deg);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.portfolio-item {
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(138, 46, 255, 0.1);
+  border: 1px solid rgba(138, 46, 255, 0.3);
+}
+
+.portfolio-item iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .portfolio-modal-content {
+    margin: 40px auto;
+    padding: 30px 16px;
+  }
+  
+  .portfolio-modal-content h2 {
+    font-size: 1.75rem;
+  }
+  
+  .portfolio-close {
+    font-size: 36px;
+    right: 16px;
+  }
+  
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
