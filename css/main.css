@@ -333,6 +333,7 @@ body.preload {
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px; /* Account for fixed navbar */
+  overflow-x: hidden;
 }
 
 body {
@@ -342,6 +343,8 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  min-height: 100vh;
 }
 
 /* ================= STATIC BG ================= */
@@ -361,9 +364,12 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: -2;
   pointer-events: none;
-  /* Let Three.js control width/height via renderer.setSize() */
+  /* Ensure canvas stays behind all content */
+  will-change: transform;
 }
 
 /* ================= STRUCTURE ================= */
@@ -373,10 +379,12 @@ section,
 footer {
   position: relative;
   z-index: 2;
+  background: transparent;
 }
 
 section {
   padding: 80px 24px;
+  overflow-x: hidden;
 }
 
 section > h2 {
@@ -1625,6 +1633,7 @@ a {
 .work {
   padding: 120px 24px;
   overflow: hidden;
+  position: relative;
 }
 
 .work h2 {
@@ -1640,10 +1649,8 @@ a {
   scroll-behavior: smooth;
   scroll-snap-type: none;
   -webkit-overflow-scrolling: touch;
-  width: 100%;
-  margin: 0;
-  margin-left: -24px;
-  margin-right: -24px;
+  width: calc(100% + 48px);
+  margin: 0 -24px;
   padding-left: 24px;
   padding-right: 24px;
 }
@@ -2574,7 +2581,8 @@ a {
 
   section {
     padding: 50px 16px;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   section > h2 {
@@ -2645,7 +2653,18 @@ a {
   }
 
   .hero-image {
-    display: none;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
+    margin-top: 24px;
+    order: 2;
+  }
+
+  .hero-image img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
   }
 
   .hero .btn-primary {
@@ -2964,6 +2983,20 @@ a {
     padding: 12px 24px;
     font-size: 13px;
     margin-top: 20px;
+  }
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 16px;
+  }
+
+  .hero-image img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
   }
 
   .service-card,
