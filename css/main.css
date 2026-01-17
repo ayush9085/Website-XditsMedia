@@ -3372,6 +3372,20 @@ a {
   border-radius: 4px;
 }
 
+#portfolio-longform .portfolio-scroll-row .portfolio-item {
+  min-width: 400px;
+  width: 400px;
+  height: 225px;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(138, 46, 255, 0.1);
+  border: 1px solid rgba(138, 46, 255, 0.3);
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .portfolio-scroll-row .portfolio-item {
   min-width: 220px;
   width: 220px;
